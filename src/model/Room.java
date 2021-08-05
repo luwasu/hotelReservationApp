@@ -6,24 +6,34 @@ public class Room implements IRoom {
     Double price;
     RoomType enumeration;
 
+    Room(String roomNumber, Double price, RoomType enumeration) {
+        super();
+    }
 
+
+    @Override
     public String getRoomNumber() {
-        return null;
+        return this.roomNumber;
     }
 
+    @Override
     public Double getRoomPrice() {
-        return null;
+        return this.price;
     }
 
+    @Override
     public RoomType getRoomType() {
-        return null;
+        return this.enumeration;
     }
 
     public boolean isFree() {
-        return false;
+        return this.price != null && this.price.equals(0.0);
     }
 
+    @Override
     public String toString() {
-        return super.toString();
+        return "Room Number: " + this.roomNumber
+                + " Price: $" + this.price
+                + " Enumeration: " + this.enumeration;
     }
 }

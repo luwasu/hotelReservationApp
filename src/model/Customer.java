@@ -8,17 +8,20 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String email;
-    String emailRegex = "^(.+)@(.+).(.+)$";
-    Pattern pattern = Pattern.compile(emailRegex);
+    private static final String EMAIL_REGEX_PATTERN = "^(.+)@(.+).(.+)$";
 
-    public Customer(String firstName, String lastName, String email) throws IllegalArgumentException {
+
+    public Customer(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.isValidEmail(email);
+    }
+
+    public void isValidEmail(String email) {
+        Pattern pattern = Pattern.compile(EMAIL_REGEX_PATTERN);
 
         if (!pattern.matcher(email).matches()) {
             throw new IllegalArgumentException(email + " is not a valid email address!");
-        } else {
-            this.email = email;
         }
     }
 
@@ -26,21 +29,23 @@ public class Customer {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getEmail() {
         return email;
     }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
 
     public void setEmail(String email) {
         this.email = email;
@@ -48,6 +53,9 @@ public class Customer {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Customer: " +
+                firstName + ", "
+                + lastName + ", "
+                + email;
     }
 }
